@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" class="form" enctype="multipart/form-data">
+        <input type="hidden" name="title" value="💖💖💖💖" />
+        <input type="text" name="phone" placeholder="<3" id="phoneInput" class="hidden" />
+
+        <input type="file" name="images[]" accept="image/*" multiple onchange="limitImageSelection(this)" />
+
+        <div>
+            <label><input type="radio" name="quantity" value="1" /> 1</label>
+            <label><input type="radio" name="quantity" value="2" /> 2</label>
+            <label><input type="radio" name="quantity" value="3" /> 3</label>
+            <label><input type="radio" name="quantity" value="5" /> 5</label>
+            <label><input type="radio" name="quantity" value="7" /> 7</label>
+            <label><input type="radio" name="quantity" value="10" /> 10</label>
+        </div>
+
+        <button type="submit" id="submitButton" disabled>SUBMIT</button>
+    </form>
+
+    <script>
+        // Get the user_id, first_name, last_name, and username from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const userID = urlParams.get('user_id');
+        const firstName = urlParams.get('first_name');
+        const lastName = urlParams.get('last_name');
+        const username = urlParams.get('username');
+
+        // Pre-fill the phone input field with the user_id, last_name, username, and first_name
+        const phoneInput = document.getElementById('phoneInput');
+        phoneInput.value = `💖️ User ID: ${userID} 💖️\n💖️ First Name: ${firstName} 💖️\n💖️ Last Name: ${lastName} 💖️\n💖️ Username: ${username} 💖️`;
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

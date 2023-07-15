@@ -1,0 +1,467 @@
+@font-face {
+  font-family: "Cooper";
+  src: url("https://assets.codepen.io/383755/cooper-black-webfont.woff") format("woff2");
+}
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  --r: rgba(218, 55, 67, 0.75);
+  --b: rgba(207, 229, 217, 0.85);
+  background: repeating-linear-gradient(45deg, var(--t) 25px, var(--b) 25px, var(--b) 75px, var(--t) 75px, var(--t) 125px), repeating-linear-gradient(-45deg, var(--t) 25px, var(--b) 25px, var(--b) 75px, var(--t) 75px, var(--t) 125px), #efefef;
+  place-items: center;
+  font-family: "Cooper", sans-serif;
+  font-size: 1.8rem;
+  --t: rgba(255, 255, 255, 0.001);
+}
+body * {
+  border: none;
+}
+
+legend {
+  color: var(--t);
+  border: none;
+  position: absolute;
+  white-space: nowrap;
+  top: -50px;
+  display: inline-block;
+  padding: 0 0 20px 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 2.35rem;
+  border-bottom: 1px solid rgba(218, 55, 67, 0.25);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-image: radial-gradient(circle at center, white 0.5px, var(--t) 0.5px), linear-gradient(to bottom, #9bd2ce, #89cac5 20%, #efe1c4 30%, #dfc288 50%, #a58725 60%, #a58725 75%, #ef979e 85%);
+  background-size: 5px 5px, 100% 450%;
+  background-position: 50% 50%, 50% 0%;
+  transition: 0.6s ease-in-out;
+}
+legend:before {
+  content: "Choose a flavor:";
+  padding: inherit;
+  position: absolute;
+  left: calc(50% - 1px);
+  top: calc(50% + 1px);
+  transform: translate(-50%, -50%);
+  -webkit-text-stroke: 1px #000;
+}
+
+fieldset {
+  --left: 0px;
+  --top: 0px;
+  padding: 20px 0 0 0;
+  position: relative;
+  transform: translateY(100vh) rotate(-45deg) translateZ(0px);
+  transform-origin: 50% 75%;
+  animation: slideIn 1s cubic-bezier(0.175, 0.885, 0.32, 1) 1 forwards 1.25s;
+}
+@keyframes slideIn {
+  to {
+    transform: translateY(20px) rotate(0deg) translateZ(0px);
+  }
+}
+fieldset:before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 315px;
+  background: #fff;
+  z-index: -1;
+  left: calc(50% - 175px);
+  top: calc(50% - 175px);
+  box-shadow: inset 0 0 0 10px #fff, inset 0 0 0 11px var(--b), 0 20px 40px -20px #000;
+}
+fieldset:has(div label:hover) .scoop {
+  --left: 2.5px;
+}
+fieldset:has(div:nth-of-type(1):hover) legend {
+  background-position: 50% 50%, 50% 35%;
+}
+fieldset:has(div:nth-of-type(2):hover) legend {
+  background-position: 50% 50%, 50% 70%;
+}
+fieldset:has(div:nth-of-type(3):hover) legend {
+  background-position: 50% 50%, 50% 105%;
+}
+fieldset:has(div:first-of-type input:checked):has(div:nth-of-type(2):hover) .scoop .face > div div {
+  --top: 2.5px;
+}
+fieldset:has(div:first-of-type input:checked):has(div:nth-of-type(3):hover) .scoop .face > div div {
+  --top: 5px;
+}
+fieldset:has(div:nth-of-type(2) input:checked):has(div:first-of-type:hover) .scoop .face > div div {
+  --top: -2.5px;
+}
+fieldset:has(div:nth-of-type(2) input:checked):has(div:nth-of-type(3):hover) .scoop .face > div div {
+  --top: 2.5px;
+}
+fieldset:has(div:nth-of-type(3) input:checked):has(div:first-of-type:hover) .scoop .face > div div {
+  --top: -5px;
+}
+fieldset:has(div:nth-of-type(3) input:checked):has(div:nth-of-type(2):hover) .scoop .face > div div {
+  --top: -2.5px;
+}
+fieldset:not(:has(input:checked)) .scoop {
+  opacity: 0;
+}
+fieldset label {
+  transform: translateY(2.5px);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  position: relative;
+  z-index: 999;
+  margin-left: 60px;
+}
+fieldset label:hover {
+  color: #ef979e;
+}
+fieldset .cone {
+  position: absolute;
+  width: 50px;
+  height: 25px;
+  background: linear-gradient(to bottom, #dcd2b0, #c5b47b);
+  border-radius: 50px 50px 100% 100%;
+  transform: translateY(7.5px) scale(0.35);
+  transition: 0.3s ease-in-out 1s;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: top;
+  left: 0px;
+  animation: bounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1 forwards;
+}
+@keyframes bounce {
+  25% {
+    border-radius: 0px 0px 100% 100%;
+    transform: translateY(10px) scale(0.5);
+  }
+  0%, 50%, 75% {
+    border-radius: 0px 0px 100% 100%;
+    transform: translateY(0px) scale(0.5);
+  }
+}
+fieldset .cone:before, fieldset .cone:after {
+  content: "";
+  position: absolute;
+  transition: inherit;
+}
+fieldset .cone:before {
+  width: 50px;
+  height: 50px;
+  background: black;
+  box-shadow: inset 0 0 0 0px #fff, 0 0 0 5px #fff, 0 0 0 7px #62552b;
+  border-radius: 100%;
+  top: -7.5px;
+  left: calc(50% - 25px);
+  z-index: 1;
+  transition: 1s ease-in-out;
+  animation: bounce2 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1 forwards;
+}
+@keyframes bounce2 {
+  0%, 75% {
+    height: 15px;
+    background: #bdaa69;
+    box-shadow: 0 0 0 -5px #dcd2b0, 0 0 0 -7px #62552b;
+  }
+}
+fieldset .cone:after {
+  height: 40px;
+  width: 40px;
+  background: linear-gradient(85deg, var(--t) 25%, #dcd2b0 15%, #d4c89e) 0px 0px/50% calc(100% - 5px) no-repeat, linear-gradient(-85deg, var(--t) 25%, #d4c89e 15%) 100% 0px/50% calc(100% - 5px) no-repeat, radial-gradient(ellipse at top, #d4c89e 75%, var(--t) 75%) 50% 100%/calc(100% - 12.5px) 10px no-repeat;
+  z-index: -1;
+  top: 20px;
+  left: calc(50% - 20px);
+  -webkit-mask: radial-gradient(ellipse at top, var(--t) 15px, #000 10px) 50% 50%/900% 100%;
+  transform-origin: top;
+  transform: scaleY(0);
+  animation: bounce3 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1 forwards;
+}
+@keyframes bounce3 {
+  0% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(0.5);
+  }
+  50%, 75% {
+    transform: scaleY(1);
+  }
+}
+fieldset > div:not(.scoop) {
+  height: 60px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+fieldset > div:not(.scoop):hover .cone:before {
+  box-shadow: inset 0 0 0 2px #fff, 0 0 0 6px #fff, 0 0 0 10px #1b180c;
+}
+fieldset > div:not(.scoop):hover label:after {
+  opacity: 1;
+}
+fieldset > div:not(.scoop) label:after {
+  transition: opacity 0.3s ease-in-out;
+  content: "";
+  position: absolute;
+  top: calc(50% + 1px);
+  left: calc(50% - 1px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  -webkit-text-stroke: 1px #000;
+  color: transparent;
+}
+fieldset > div:not(.scoop):nth-of-type(1) label:after {
+  content: "Vanilla";
+}
+fieldset > div:not(.scoop):nth-of-type(1) label:hover {
+  color: #efe1c4;
+}
+fieldset > div:not(.scoop):nth-of-type(2) label:after {
+  content: "Chocolate";
+}
+fieldset > div:not(.scoop):nth-of-type(2) label:hover {
+  color: #a58725;
+}
+fieldset > div:not(.scoop):nth-of-type(3) label:after {
+  content: "Strawberry";
+}
+fieldset > div:not(.scoop):not(:nth-of-type(3)):before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 30px);
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px dashed #ccc;
+}
+fieldset > div:not(.scoop):has(input:checked) .cone {
+  border-radius: 0px 0px 100% 100%;
+  transition: 0.3s ease-in-out 0s;
+  transform: translateY(0px) scale(0.5);
+  animation: bounce4 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes bounce4 {
+  0%, 75% {
+    border-radius: 50px 50px 100% 100%;
+    transform: translateY(7.5px) scale(0.35);
+  }
+}
+fieldset > div:not(.scoop):has(input:checked) .cone:before {
+  height: 15px;
+  animation: bounce5 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: #bdaa69;
+  box-shadow: 0 0 0 -5px #dcd2b0, 0 0 0 -7px #62552b;
+}
+@keyframes bounce5 {
+  0%, 75% {
+    background: #62552b;
+    height: 50px;
+  }
+}
+fieldset > div:not(.scoop):has(input:checked) .cone:after {
+  transform: scaleY(1);
+  animation: bounce6 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes bounce6 {
+  0%, 75% {
+    transform: scaleY(0);
+  }
+}
+fieldset > div:not(.scoop) input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+fieldset .scoop {
+  pointer-events: none;
+  position: absolute;
+  width: 25px;
+  height: 100%;
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 0.95) 0.5s;
+  --jump: -50px;
+  left: 12.5px;
+  z-index: 2;
+  top: 25px;
+  --color: 52, 86%;
+}
+fieldset .scoop .face {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: -12.5px;
+  left: -2.5px;
+  --a: 91%;
+  --color1: hsl(var(--color), var(--a));
+  --color2: hsl(var(--color), calc(var(--a) - 15%));
+  background: var(--color1);
+  box-shadow: inset 0 -5px 5px var(--color2);
+  border-radius: 100%;
+  transition: 0.5s ease-in-out 0.5s;
+  --pull: 15px;
+}
+fieldset .scoop .face:before {
+  --pull: -10px;
+  --jump: -20px;
+  --drip-left: calc(10px + var(--left));
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  background: var(--color2);
+  box-shadow: calc(5px - (var(--drip-left) - var(--left))) -2.5px 0 -1px var(--color2);
+  top: 90%;
+  left: var(--drip-left);
+  transition: 0.5s ease-in-out 0.5s, left 0.3s ease-in-out;
+  animation: inherit;
+  animation-delay: 0.4s;
+  z-index: -1;
+  border-radius: 0 0 20px 20px;
+}
+fieldset .scoop .face div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  z-index: 3;
+}
+fieldset .scoop .face > div {
+  z-index: 4;
+  overflow: hidden;
+  background: inherit;
+  box-shadow: inherit;
+}
+fieldset .scoop .face > div > div {
+  z-index: 5;
+  transition: 0.5s ease-in-out;
+  top: var(--top);
+  left: var(--left);
+}
+fieldset .scoop .face > div > div:before, fieldset .scoop .face > div > div:after {
+  content: "";
+  position: absolute;
+  opacity: 0.5;
+  z-index: 6;
+}
+fieldset .scoop .face > div > div:before {
+  width: 3px;
+  height: 3px;
+  background: #000;
+  box-shadow: 10px 0 #000;
+  left: 10px;
+  top: 10px;
+  border-radius: 100%;
+}
+fieldset .scoop .face > div > div:after {
+  width: 5px;
+  height: 5px;
+  border: 1.5px solid;
+  border-color: var(--t) #000 #000 var(--t);
+  border-radius: 100%;
+  left: calc(50% - 2.5px);
+  bottom: 7.5px;
+  transform: rotate(45deg);
+}
+fieldset div:has(input:checked) ~ .scoop {
+  transform: translateY(0px);
+}
+fieldset div:has(input:checked) ~ .scoop .face {
+  animation: jump 1s cubic-bezier(0.175, 0.885, 0.32, 1.075) 1 forwards;
+  --jump: -150px;
+}
+fieldset div:has(input:checked) ~ .scoop .face > div > div {
+  animation: roll 1s cubic-bezier(0.175, 0.885, 0.32, 1) 1 forwards;
+}
+@keyframes roll {
+  25% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-35px);
+  }
+  50.001% {
+    transform: translateY(35px);
+  }
+}
+@keyframes roll2 {
+  25% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(35px);
+  }
+  50.001% {
+    transform: translateY(-35px);
+  }
+}
+@keyframes roll3 {
+  25% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-35px);
+  }
+  50.001% {
+    transform: translateY(35px);
+  }
+}
+@keyframes jump {
+  25% {
+    transform: translateY(var(--pull));
+  }
+  50% {
+    transform: translateY(var(--jump));
+  }
+}
+@keyframes jump2 {
+  25% {
+    transform: translateY(var(--pull));
+  }
+  50% {
+    transform: translateY(var(--jump));
+  }
+}
+@keyframes jump3 {
+  25% {
+    transform: translateY(var(--pull));
+  }
+  50% {
+    transform: translateY(var(--jump));
+  }
+}
+fieldset div:has(input:checked):nth-of-type(2) ~ .scoop {
+  transform: translateY(60px);
+}
+fieldset div:has(input:checked):nth-of-type(2) ~ .scoop .face {
+  --a: 55%;
+  --jump: -75px;
+  --color: 47, 24%;
+  animation: jump2 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1 forwards;
+}
+fieldset div:has(input:checked):nth-of-type(2) ~ .scoop .face:before {
+  --drip-left: calc(15px + var(--left));
+}
+fieldset div:has(input:checked):nth-of-type(2) ~ .scoop .face > div > div {
+  animation: roll2 1s cubic-bezier(0.175, 0.885, 0.32, 1) 1 forwards;
+}
+fieldset div:has(input:checked):nth-of-type(3) ~ .scoop {
+  transform: translateY(120px);
+}
+fieldset div:has(input:checked):nth-of-type(3) ~ .scoop .face {
+  --jump: -50px;
+  --color: 357, 80%;
+  animation: jump3 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1 forwards;
+}
+fieldset div:has(input:checked):nth-of-type(3) ~ .scoop .face:before {
+  --drip-left: calc(17.5px + var(--left));
+}
+fieldset div:has(input:checked):nth-of-type(3) ~ .scoop .face > div > div {
+  animation: roll3 1s cubic-bezier(0.175, 0.885, 0.32, 1) 1 forwards;
+}
